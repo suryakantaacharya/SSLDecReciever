@@ -12,7 +12,6 @@ import org.springframework.util.StreamUtils;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
 
 @Component
 public class DecryptingFilter extends OncePerRequestFilter {
@@ -24,6 +23,7 @@ public class DecryptingFilter extends OncePerRequestFilter {
             // Read the encrypted payload from the request body
             InputStream encryptedInputStream = request.getInputStream();
             byte[] encryptedPayload = StreamUtils.copyToByteArray(encryptedInputStream);
+            System.out.println(new String(encryptedPayload));
 
             // Decrypt the payload
             byte decryptedPayload[] = CryptoUtils.decrypt(encryptedPayload);
